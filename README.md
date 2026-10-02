@@ -13,7 +13,50 @@ measured DAC voltage.
 5. Explain why PWM is not the same signal as DAC output and why an ADC
    endpoint may saturate.
 
+## Test 1 circuit sketch
+```
+            +-------------------+
+3V3 --------+ 3V3               |
+            |     ESP32 DevKit  |
+  +------+  |                   |
+  |  POT  |-+------------------>| GPIO34 (ADC IN) -- reads wiper voltage
+  | wiper |  |                   |
+  +------+  |                   |
+GND --------+ GND               |
+            +-------------------+
+```
 
+## Test 2 circuit sketch
+```
+            +-------------------+
+3V3 --------+ 3V3               |
+            |     ESP32 DevKit  |
+  +------+  |                   |
+  |  POT  |-+------------------>| GPIO34 (ADC IN) -- reads brightness setting
+  | wiper |  |                   |
+  +------+  |                   |
+GND --------+ GND               |
+            |                   |
+            |  GPIO19 (PWM OUT) +----[220 ohm]----( LED )---+
+            |                   |                            |
+GND --------+ GND               |                            |
+            +-------------------+                            |
+                                                               |
+            (LED other leg connects back to GND) -------------+
+```
+
+## Test 3 circuit sketch
+```
+            +-------------------+
+            |     ESP32 DevKit  |
+            |                   |
+            |  GPIO25 (DAC OUT) +----+
+            |                   |    |   (jumper wire = loopback)
+            |  GPIO34 (ADC IN)  +----+
+            |                   |
+GND --------+ GND               |
+            +-------------------+
+```
 
 ## Files
 
